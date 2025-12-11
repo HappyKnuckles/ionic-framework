@@ -466,6 +466,15 @@ export class Searchbar implements ComponentInterface {
   };
 
   /**
+   * Dismisses the keyboard when the Enter key is pressed.
+   */
+  private onKeyDown = (ev: KeyboardEvent) => {
+    if (ev.key === 'Enter' || ev.keyCode === 13) {
+      this.nativeInput?.blur();
+    }
+  };
+
+  /**
    * Positions the input search icon, placeholder, and the cancel button
    * based on the input value and if it is focused. (ios only)
    */
@@ -663,6 +672,7 @@ export class Searchbar implements ComponentInterface {
             onChange={this.onChange}
             onBlur={this.onBlur}
             onFocus={this.onFocus}
+            onKeyDown={this.onKeyDown}
             minLength={this.minlength}
             maxLength={this.maxlength}
             placeholder={this.placeholder}

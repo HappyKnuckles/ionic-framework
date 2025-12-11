@@ -93,6 +93,27 @@ configs({ modes: ['ios'], directions: ['ltr'] }).forEach(({ title, config }) => 
       await expect(nativeInput).toHaveAttribute('placeholder', 'My Placeholder');
     });
   });
+
+  test.describe(title('searchbar: keyboard'), () => {
+    test('should blur the input when pressing Enter', async ({ page }) => {
+      await page.setContent(
+        `
+        <ion-searchbar></ion-searchbar>
+      `,
+        config
+      );
+
+      const searchbar = page.locator('ion-searchbar');
+      const nativeInput = searchbar.locator('input');
+
+      await searchbar.click();
+      await expect(nativeInput).toBeFocused();
+
+      await nativeInput.press('Enter');
+
+      await expect(nativeInput).not.toBeFocused();
+    });
+  });
 });
 
 configs().forEach(({ title, screenshot, config }) => {
