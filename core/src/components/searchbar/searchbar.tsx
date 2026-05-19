@@ -469,7 +469,7 @@ export class Searchbar implements ComponentInterface {
    * Dismisses the keyboard when the Enter key is pressed.
    */
   private onKeyDown = (ev: KeyboardEvent) => {
-    if (ev.key === 'Enter' || ev.keyCode === 13) {
+    if (ev.key === 'Enter' || ev.code === '13') {
       this.nativeInput?.blur();
     }
   };
